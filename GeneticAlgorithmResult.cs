@@ -41,7 +41,7 @@ namespace NQueenGeneticAlgorithm
 
         public void EvolvePopulation()
         {
-            var newPopulation = new Individual[Size];
+            var newPopulation = new Individual[PopulationSize];
 
             var bestIndividual = Population.OrderBy(individual => individual.Fitness).First();
             newPopulation[0] = bestIndividual;
@@ -55,12 +55,14 @@ namespace NQueenGeneticAlgorithm
                 Mutate(ref first);
                 Mutate(ref second);
 
-                Population[i] = first;
+                newPopulation[i] = first;
 
-                if (!(i + 1 < PopulationSize)) break;
+                if (i + 1 >= PopulationSize) break;
 
-                Population[i + 1] = second;
+                newPopulation[i + 1] = second;
             }
+
+            Population = newPopulation;
 
             Generation++;
         }
