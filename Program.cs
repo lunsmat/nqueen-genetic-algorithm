@@ -25,7 +25,7 @@
                 results.Add(result);
             }
 
-            var timeList = from result in results select result.GetWatchTicks();
+            var timeList = from result in results select result.GetWatchMilliSeconds();
             var generationList = from result in results select (long) result.GetGeneration();
 
             var timeAverage = timeList.Average();
@@ -43,11 +43,11 @@
                 .Take(5);
 
             Console.WriteLine($"======================================= Resultados =======================================");
-            Console.WriteLine($"Media de Tempo: {timeAverage} Ticks");
+            Console.WriteLine($"Media de Tempo: {timeAverage} ms");
             Console.WriteLine($"Media de Gerações: {generationAverage} Gerações");
-            Console.WriteLine($"Desvio Padrão de Tempo: {timeStandardDeviation} Ticks");
+            Console.WriteLine($"Desvio Padrão de Tempo: {timeStandardDeviation} ms");
             Console.WriteLine($"Desvio Padrão de Gerações: {generationStandardDeviation} Gerações");
-            Console.WriteLine($"Menor Tempo: {minorTime} Ticks");
+            Console.WriteLine($"Menor Tempo: {minorTime} ms");
             Console.WriteLine($"Menor Número de Gerações: {minorGenerations} Gerações");
 
             Console.WriteLine();

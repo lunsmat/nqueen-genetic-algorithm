@@ -6,11 +6,11 @@ namespace NQueenGeneticAlgorithm
         {
             var result = new GeneticAlgorithmResult(size, populationSize, crossoverRate, mutationRate);
 
-            do {
+            while (maxGenerations == -1 || maxGenerations > result.GetGeneration()) {
                 result.EvolvePopulation();
 
                 if (result.BestIndividual.Fitness == 0) break;
-            } while (maxGenerations == -1 || maxGenerations > result.GetGeneration());
+            }
 
             result.FinishWatch();
 

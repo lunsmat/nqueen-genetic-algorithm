@@ -72,9 +72,9 @@ namespace NQueenGeneticAlgorithm
             Watch.Stop();
         }
 
-        public long GetWatchTicks()
+        public long GetWatchMilliSeconds()
         {
-            return Watch.ElapsedTicks;
+            return Watch.ElapsedMilliseconds;
         }
 
         private Individual SelectParent()
@@ -108,16 +108,14 @@ namespace NQueenGeneticAlgorithm
 
         private void Mutate(ref Individual individual)
         {
-            for (int i = 0; i < Size; i++) {
-                if (new Random().NextDouble() < MutationRate) {
-                    int bitToFlip = new Random().Next(3); // Only works with population 8
-                    int index = new Random().Next(Size);
+            if (new Random().NextDouble() < MutationRate) {
+                int bitToFlip = new Random().Next(3); // Only works with population 8
+                int index = new Random().Next(Size);
 
-                    int gene = individual.GetGenes().ElementAt(index);
+                int gene = individual.GetGenes().ElementAt(index);
 
-                    gene ^= (1 << bitToFlip);
-                    individual.UpdateGenes(index, (int) gene);
-                }
+                gene ^= (1 << bitToFlip);
+                individual.UpdateGenes(index, (int) gene);
             }
         }
 
@@ -134,7 +132,7 @@ namespace NQueenGeneticAlgorithm
             result += $"Taxa de cruzamento: {CrossoverRate}\n";
             result += $"Taxa de Mutação: {MutationRate}\n";
             result += $"Gerações: {Generation}\n";
-            result += $"Tempo: {Watch.ElapsedTicks} ticks\n";
+            result += $"Tempo: {Watch.ElapsedMilliseconds} ms\n";
             var optimal = BestIndividual.Fitness == 0 ? "Alcançada" : "Não Alcançada";
             result += $"Solução Ótima: {optimal}\n";
             result += $"Genes Melhor Indivíduo: {BestIndividual}\n";
